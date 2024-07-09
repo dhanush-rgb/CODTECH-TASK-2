@@ -5,19 +5,15 @@ const weatherApi = {
     baseUrl: 'https://api.openweathermap.org/data/2.5/weather'
 }
 
-//anonymous function
-//adding event listener key press of enter
 let searchInputBox = document.getElementById('input-box');
 searchInputBox.addEventListener('keypress', (event) => {
     if (event.keyCode == 13) {
-        // console.log(searchInputBox.value);
         getWeatherReport(searchInputBox.value);
         
     }
 })
 
 
-//get waether report
 
 function getWeatherReport(city) {
     fetch(`${weatherApi.baseUrl}?q=${city}&appid=${weatherApi.key}&units=metric`)  // fetch method fetching the data from  base url ...metric is used for unit in celcius......here i am appending the base url to get data by city name .  
@@ -27,7 +23,6 @@ function getWeatherReport(city) {
 
 }
 
-//show weather report
 
 function showWeaterReport(weather) {
     let city_code=weather.cod;
@@ -40,8 +35,6 @@ function showWeaterReport(weather) {
     }
     else{
 
-    // console.log(weather.cod);
-    // console.log(weather);  
     let op = document.getElementById('weather-body');
     op.style.display = 'block';
     let todayDate = new Date();
@@ -72,7 +65,6 @@ function showWeaterReport(weather) {
 
 
 
-//making a function for the  last update current time 
 
 function getTime(todayDate) {
     let hour =addZero(todayDate.getHours());
@@ -80,7 +72,6 @@ function getTime(todayDate) {
     return `${hour}:${minute}`;
 }
 
-//date manage for return  current date
 function dateManage(dateArg) {
     let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -90,11 +81,9 @@ function dateManage(dateArg) {
     let month = months[dateArg.getMonth()];
     let date = dateArg.getDate();
     let day = days[dateArg.getDay()];
-    // console.log(year+" "+date+" "+day+" "+month);
     return `${date} ${month} (${day}) , ${year}`
 }
 
-// function for the dynamic background change  according to weather status
 function changeBg(status) {
     if (status === 'Clouds') {
         document.body.style.backgroundImage = 'url(img/clouds.jpg)';
@@ -121,7 +110,6 @@ function changeBg(status) {
     }
 }
 
-//making a function for the classname of icon
 function getIconClass(classarg) {
     if (classarg === 'Rain') {
         return 'fas fa-cloud-showers-heavy';
@@ -147,7 +135,6 @@ function reset() {
     input.value = "";
 }
 
-// funtion to add zero if hour and minute less than 10
 function addZero(i) {
     if (i < 10) {
         i = "0" + i;
